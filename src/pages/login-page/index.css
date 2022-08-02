@@ -1,0 +1,44 @@
+
+.container {
+    margin: auto;
+    text-align: center;
+    background-color: #e6e6e6;
+    width: 33%;
+    border-radius: 5px;
+}
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    border: 0;
+}
+input::placeholder {
+    color: #11152A;
+}
+button {
+    width: 100%;
+    padding: 16px 24px;
+    background-color: #11152A;
+    color: white;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 0;
+}
+img {
+    height: 90px;
+    margin: auto;
+}
+.img-container {
+    width: 100%;
+    background-color: #11152A;
+    padding: 10px 0;
+}
+.body {
+    padding: 15px;
+}
+.link {
+    margin: 8px 0;
+}
