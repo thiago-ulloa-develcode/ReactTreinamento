@@ -1,6 +1,13 @@
+html,
+body {
+  height: 100%;
+  padding: 0;
+  width: 100%;
+}
 .App {
-  background-color: black;
+  background-color: #F7F7F7;
   margin: 0px;
+  min-height: 100vh;
   height: 100%;
   width: 100%;
   display: flex;

@@ -3,12 +3,12 @@
     margin: auto;
     text-align: center;
     background-color: #e6e6e6;
-    width: 33%;
+    width: 45%;
     border-radius: 5px;
 }
 input {
-    width: 100%;
-    padding: 12px 20px;
+    width: 90%;
+    padding: 12px 10px;
     margin: 15px 0;
     border-radius: 8px;
     border: 0;
@@ -17,9 +17,9 @@ input::placeholder {
     color: #11152A;
 }
 button {
-    width: 100%;
+    width: 92%;
     padding: 16px 24px;
-    background-color: #11152A;
+    background-color: #EA1D2C;
     color: white;
     margin: 4px 2px;
     cursor: pointer;
@@ -33,12 +33,20 @@ img {
 }
 .img-container {
     width: 100%;
-    background-color: #11152A;
-    padding: 10px 0;
-}
-.body {
-    padding: 15px;
+    background-color: #BA0203;
+    padding: 30px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .link {
     margin: 8px 0;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.extrabuttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
