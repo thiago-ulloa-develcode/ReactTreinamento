@@ -1,7 +1,7 @@
 import './index.css'
 import LogoDevelcode from './logodevelcode.png';
 
-function LoginPage() {
+function LoginPage({history}) {
     
     return (
       <div class="container">
@@ -12,7 +12,7 @@ function LoginPage() {
                 <input type="Password" name="password" placeholder="Senha" id="senha"/>
                 <button type="button" onClick={() => loginFunction()}>Login</button>
                 <div class="extrabuttons">
-                <p class="link"><a>Esqueci minha senha</a></p><p class="link"><a>Criar nova conta</a></p>
+                <p class="link"><a>Esqueci minha senha</a></p><p class="link" onClick={() => window.location.replace("/pages/register-page/index.js")}><a>Criar nova conta</a></p>
                 </div>
                 
         </div>
@@ -20,6 +20,9 @@ function LoginPage() {
     );
 
     function loginFunction() {
+      if (!document.getElementById("email").value || !document.getElementById("senha").value){
+        return console.log('Erro de solicitação');
+      } else {
       fetch('https://develfood-3.herokuapp.com/auth', {
         method: "POST",
         headers: {
@@ -30,8 +33,9 @@ function LoginPage() {
         "password": document.getElementById("senha").value}) 
       })
       .then(response => response.json())
-      .then(json => console.log(json))
+      .then(json => history.push("/home"))
       .catch(err => console.log('Erro de solicitação', err));}
+    }
 }
 
   export default LoginPage;
