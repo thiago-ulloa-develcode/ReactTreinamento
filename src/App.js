@@ -1,19 +1,22 @@
 import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/login-page";
 import HomePage from "./pages/home-page";
+import RegisterPage from "./pages/register-page";
+import ForgotPassword from "./pages/forgotpassword";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to React Router!</h1>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/register-page" element={<RegisterPage />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
       </Routes>
     </div>
   );
 }
 
-export default App();
+export default App;

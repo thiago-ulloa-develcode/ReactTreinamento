@@ -1,43 +1,63 @@
-import './index.css'
-import LogoDevelcode from './logodevelcode.png';
+import "./index.css";
+import LogoDevelcode from "./logodevelcode.png";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage({history}) {
-    
-    return (
-      <div class="container">
-            <div class="img-container">
-                <img alt="logodevelcode" src={LogoDevelcode}/>
-            </div>
-                <input type="text" name="email" placeholder="Email" id="email"/>
-                <input type="Password" name="password" placeholder="Senha" id="senha"/>
-                <button type="button" onClick={() => loginFunction()}>Login</button>
-                <div class="extrabuttons">
-                <p class="link"><a>Esqueci minha senha</a></p><p class="link" onClick={() => window.location.replace("/pages/register-page/index.js")}><a>Criar nova conta</a></p>
-                </div>
-                
-        </div>
-        
-    );
+function LoginPage() {
+  let navigate = useNavigate();
 
-    function loginFunction() {
-      if (!document.getElementById("email").value || !document.getElementById("senha").value){
-        return console.log('Erro de solicitação');
-      } else {
-      fetch('https://develfood-3.herokuapp.com/auth', {
+  return (
+    <div className="container">
+      <div className="img-container">
+        <img alt="logodevelcode" src={LogoDevelcode} />
+      </div>
+      <input type="text" name="email" placeholder="Email" id="email" />
+      <input type="Password" name="password" placeholder="Senha" id="senha" />
+      <button type="button" onClick={() => loginFunction()}>
+        Login
+      </button>
+      <div className="extrabuttons">
+        <p className="link"
+          onClick={() =>
+            window.location.assign("/forgotpassword")
+        }
+        >
+          <a>Esqueci minha senha</a>
+        </p>
+        <p
+          className="link"
+          onClick={() =>
+            window.location.assign("/register-page")
+          }
+        >
+          <a>Criar nova conta</a>
+        </p>
+      </div>
+    </div>
+  );
+
+  function loginFunction() {
+    if (
+      !document.getElementById("email").value ||
+      !document.getElementById("senha").value
+    ) {
+      return console.log("Erro de solicitação");
+    } else {
+      fetch("https://develfood-3.herokuapp.com/auth", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json; charset=utf8"
+          "Content-Type": "application/json; charset=utf8",
         },
         body: JSON.stringify({
-        "email": document.getElementById("email").value,
-        "password": document.getElementById("senha").value}) 
+          email: document.getElementById("email").value,
+          password: document.getElementById("senha").value,
+        }),
       })
-      .then(response => response.json())
-      .then(json => history.push("/home"))
-      .catch(err => console.log('Erro de solicitação', err));}
+        .then((response) => response.json())
+        .then((json) => navigate("/home"))
+        .catch((err) => console.log("Erro de solicitação", err));
+      navigate("/home");
     }
+  }
 }
 
-  export default LoginPage;
-
-  
+export default LoginPage;
