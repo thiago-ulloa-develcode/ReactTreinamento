@@ -5,6 +5,17 @@ import React, { useState } from 'react';
 function RegisterPage2() {
     const [foodState, setFoodState] = useState("");
 
+    
+          fetch("https://develfood-3.herokuapp.com/foodType", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json; charset=utf8",
+            },
+          })
+            .then((response) => response.json())
+            .catch((err) => console.log("Erro de solicitação", err));
+
+
     return (
       <div class="container">
             <div class="img-container">
