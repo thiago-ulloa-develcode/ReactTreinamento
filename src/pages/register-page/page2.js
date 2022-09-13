@@ -10,10 +10,17 @@ function RegisterPage2() {
             method: "GET",
             headers: {
               "Content-Type": "application/json; charset=utf8",
-            },
+            }
+            .then((response) => this.onFetchSucess(response.data))
+            .catch((err) => console.log("Erro de solicitação", err)),
+            onFetchSucess(foodTypes) {
+              const options = foodTypes.map((food) => ({
+                value: food.id,
+                label: food.name,
+              }))
+              this.setFoodState({ options, error: null})
+            }
           })
-            .then((response) => response.json())
-            .catch((err) => console.log("Erro de solicitação", err));
 
 
     return (
@@ -40,6 +47,8 @@ function RegisterPage2() {
         </div>
         
     );
+
+    
 }
 
 
