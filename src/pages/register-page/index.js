@@ -13,6 +13,7 @@ function RegisterPage() {
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [cnpj, setCnpj] = React.useState("");
+  const [emailCheck] = React.useState("");
   const [canSubmit, setCanSubmit] = React.useState(false);
 
   // https://www.w3schools.com/js/js_comparisons.asp
@@ -55,6 +56,9 @@ function RegisterPage() {
         .then(function(response) {
           if(response.status === 200) {
             console.log("email já utilizado")
+            emailCheck = 200;
+          } else {
+            emailCheck = 500;
           }
         })
         .catch((err) => console.log("Erro de solicitação", err))
@@ -93,7 +97,11 @@ function RegisterPage() {
         onClick={() => {
           handleSubmit();
           emailCheckFunction();
-
+          if(emailCheck!=500) {
+            alert("Email já utilizado")
+          } else {
+            window.location.assign("/foods-page");
+          }
         }}
         disabled={!canSubmit}
 

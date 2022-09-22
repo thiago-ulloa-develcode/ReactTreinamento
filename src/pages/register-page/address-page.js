@@ -5,7 +5,6 @@ import {
   isValidCep
 } from "../../utils/formValidation";
 import "./index.css";
-import { createPath } from "react-router-dom";
 
 function AddressPage() {
   const [cep, setCep] = React.useState("");
