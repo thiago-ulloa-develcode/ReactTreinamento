@@ -57,14 +57,16 @@ img {
   color: #222;
 }
 
-select {
+.css-6j8wv5-Input {
+  display: flex;
   width: 90%;
   padding: 12px 10px;
   margin: 15px 0;
   border-radius: 8px;
   border: 0;
 }
-select::placeholder {
+
+Select::placeholder {
   color: #11152a;
 }
 

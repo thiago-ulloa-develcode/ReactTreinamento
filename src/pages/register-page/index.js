@@ -1,4 +1,5 @@
 import React from "react";
+import Select from 'react-select'
 import LogoDevelcode from "./logodevelcode.png";
 import {
   formatCNPJ,
@@ -70,7 +71,7 @@ function RegisterPage() {
         className={disabledClass}
         onClick={() => {
           handleSubmit();
-          window.location.assign("/register-page2");
+          window.location.assign("/foods-page");
         }}
         disabled={!canSubmit}
 
