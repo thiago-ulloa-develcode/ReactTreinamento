@@ -1,5 +1,4 @@
 import React from "react";
-import Select from 'react-select'
 import LogoDevelcode from "./logodevelcode.png";
 import {
   formatCNPJ,
@@ -40,6 +39,27 @@ function RegisterPage() {
   // https://www.w3schools.com/react/react_es6_ternary.asp
   const disabledClass = !canSubmit ? "disabled-button" : "";
 
+  function emailCheckFunction() {
+    if (
+      !document.getElementById("email").value
+    ) {
+      return console.log("Erro de solicitação"); 
+    }
+  
+    fetch("https://develfood-3.herokuapp.com/user/verify?email=" + email, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=utf8",
+        }
+      })
+        .then(function(response) {
+          if(response.status === 200) {
+            console.log("email já utilizado")
+          }
+        })
+        .catch((err) => console.log("Erro de solicitação", err))
+  }
+  
   // https://pt-br.reactjs.org/docs/forms.html
   return (
     <div className="container">
@@ -56,6 +76,7 @@ function RegisterPage() {
       <input
         type="password"
         placeholder="Senha"
+        id="email"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -71,7 +92,8 @@ function RegisterPage() {
         className={disabledClass}
         onClick={() => {
           handleSubmit();
-          window.location.assign("/foods-page");
+          emailCheckFunction();
+
         }}
         disabled={!canSubmit}
 
@@ -87,5 +109,7 @@ function RegisterPage() {
     </div>
   );
 }
+
+
 
 export default RegisterPage;

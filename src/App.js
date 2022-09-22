@@ -5,6 +5,7 @@ import HomePage from "./pages/home-page";
 import RegisterPage from "./pages/register-page";
 import ForgotPassword from "./pages/forgotpassword";
 import FoodsPage from "./pages/register-page/foods-page";
+import AddressPage from "./pages/register-page/address-page";
 import "./App.css";
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register-page" element={<RegisterPage />} />
         <Route path="/foods-page" element={<FoodsPage />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/address-page" element={<AddressPage />} />
       </Routes>
     </div>
   );
