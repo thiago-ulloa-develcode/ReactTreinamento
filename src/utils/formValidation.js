@@ -10,8 +10,6 @@ export const formatCNPJ = (value) => {
     .replace(/(-\d{2})\d+?$/, "$1");
 };
 
-
-
 // https://www.geradorcnpj.com/javascript-validar-cnpj.htm
 // Não siga o padrão de código dessa função, mas deu preguiça de montar uma e essa funciona
 export const isValidCnpj = (cnpj) => {
@@ -94,12 +92,22 @@ export const isValidPassword = (password) => {
   alert("Senha Inválida");
 };
 
+export const formatPhoneNumber = (number) => {
+  let cleaned = ("" + number).replace(/\D/g, "");
+  let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+  if (match) {
+    return "(" + match[1] + ") " + match[2] + "-" + match[3];
+  }
+
+  return null;
+};
+
 export const formatCep = (cep) => {
   return cep
-    .replace(/\D/g, '')
-    .replace(/(\d{5})(\d)/, '$1-$2')
-    .replace(/(-\d{3})\d+?$/, '$1')
-}
+    .replace(/\D/g, "")
+    .replace(/(\d{5})(\d)/, "$1-$2")
+    .replace(/(-\d{3})\d+?$/, "$1");
+};
 
 export const isValidCep = (cep) => {
   const invalids = [
@@ -128,5 +136,4 @@ export const isValidCep = (cep) => {
     alert("CEP inválido");
     return false;
   }
-
-}
+};

@@ -1,9 +1,7 @@
 import React from "react";
 import LogoDevelcode from "./logodevelcode.png";
-import {
-  formatCep,
-  isValidCep
-} from "../../utils/formValidation";
+import { formatCep, isValidCep } from "../../utils/formValidation";
+import { useLocation } from "react-router-dom";
 import "./index.css";
 
 function AddressPage() {
@@ -16,9 +14,13 @@ function AddressPage() {
     setCanSubmit(cep.lenght === 9);
   }, [cep]);
 
+  const { state } = useLocation();
+  const { email, password, cnpj, resName, resNumber, resFoodType } = state;
+  console.log(state);
+
   const handleSubmit = () => {
     const form = {
-      cep
+      cep,
     };
 
     if (isValidCep(cep)) {
@@ -61,7 +63,6 @@ function AddressPage() {
           window.location.assign("/foods-page");
         }}
         disabled={!canSubmit}
-
       >
         Próximo
       </button>

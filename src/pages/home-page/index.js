@@ -1,5 +1,13 @@
+import "./index.css";
+
 function HomePage() {
-    return "homepage";
+  return (
+    <div id="mySidemenu" class="sidemenu">
+      <div class="menubutton">
+        <img src="menubar.png" id="menubutton" onclick="openNav()"></img>
+      </div>
+    </div>
+  );
 }
 
-export default HomePage();
+export default HomePage;

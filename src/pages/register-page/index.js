@@ -1,5 +1,6 @@
 import React from "react";
 import LogoDevelcode from "./logodevelcode.png";
+import { useNavigate } from "react-router-dom";
 import {
   formatCNPJ,
   isValidCnpj,
@@ -9,11 +10,11 @@ import {
 import "./index.css";
 
 function RegisterPage() {
+  let navigate = useNavigate();
   // https://www.w3schools.com/react/react_forms.asp
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [cnpj, setCnpj] = React.useState("");
-  const [emailCheck] = React.useState("");
   const [canSubmit, setCanSubmit] = React.useState(false);
 
   // https://www.w3schools.com/js/js_comparisons.asp
@@ -23,15 +24,18 @@ function RegisterPage() {
     setCanSubmit(password && email && cnpj.length === 18);
   }, [password, email, cnpj]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const form = {
       email,
       password,
       cnpj,
     };
 
-    if (isValidCnpj(cnpj) && isValidEmail(email) && isValidPassword(password)) {
-      console.log(form); // next step
+    if (isValidEmail(email) && isValidPassword(password)) {
+      const resp = await emailCheckFunction(form); // next step
+      if (!resp) {
+        navigate("/foods-page", { state: form });
+      }
     }
   };
 
@@ -40,30 +44,23 @@ function RegisterPage() {
   // https://www.w3schools.com/react/react_es6_ternary.asp
   const disabledClass = !canSubmit ? "disabled-button" : "";
 
-  function emailCheckFunction() {
-    if (
-      !document.getElementById("email").value
-    ) {
-      return console.log("Erro de solicitação"); 
-    }
-  
-    fetch("https://develfood-3.herokuapp.com/user/verify?email=" + email, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=utf8",
+  async function emailCheckFunction(form) {
+    try {
+      const response = await fetch(
+        "https://develfood-3.herokuapp.com/user/verify?email=" + email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json; charset=utf8",
+          },
         }
-      })
-        .then(function(response) {
-          if(response.status === 200) {
-            console.log("email já utilizado")
-            emailCheck = 200;
-          } else {
-            emailCheck = 500;
-          }
-        })
-        .catch((err) => console.log("Erro de solicitação", err))
+      );
+      return response.status === 200 ? response.json : false;
+    } catch (err) {
+      console.log("Erro de solicitação", err);
+    }
   }
-  
+
   // https://pt-br.reactjs.org/docs/forms.html
   return (
     <div className="container">
@@ -96,15 +93,8 @@ function RegisterPage() {
         className={disabledClass}
         onClick={() => {
           handleSubmit();
-          emailCheckFunction();
-          if(emailCheck!=500) {
-            alert("Email já utilizado")
-          } else {
-            window.location.assign("/foods-page");
-          }
         }}
         disabled={!canSubmit}
-
       >
         Próximo
       </button>
@@ -117,7 +107,5 @@ function RegisterPage() {
     </div>
   );
 }
-
-
 
 export default RegisterPage;
