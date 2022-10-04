@@ -31,7 +31,7 @@ function FoodsPage() {
   };
 
   function handleChange(e) {
-    setResFoodType(e.label);
+    setResFoodType(e.value);
   }
 
   function nextPage() {

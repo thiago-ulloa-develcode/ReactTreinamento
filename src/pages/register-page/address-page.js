@@ -4,6 +4,7 @@ import { formatCep, isValidCep } from "../../utils/formValidation";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import moment from "moment/moment";
 
 function AddressPage() {
   let navigate = useNavigate();
@@ -98,14 +99,16 @@ function AddressPage() {
         body: JSON.stringify({
           email: email,
           password: password,
-          creationDate: "",
-          role: "",
+          creationDate: moment().format("YYYY-MM-DD"),
+          role: {
+            id: 1,
+          },
           restaurant: {
             name: resName,
             cnpj: cnpj,
             phone: resNumber,
             photo: {
-              code: "",
+              code: "imagemEmBase64",
             },
             foodTypes: [{ id: resFoodType }],
             address: {
