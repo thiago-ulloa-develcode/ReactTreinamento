@@ -1,6 +1,8 @@
 import React from "react";
 import LogoDevelcode from "./logodevelcode.png";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   formatCNPJ,
   isValidCnpj,
@@ -12,6 +14,7 @@ import "./index.css";
 function RegisterPage() {
   let navigate = useNavigate();
   // https://www.w3schools.com/react/react_forms.asp
+  const notify = () => toast("Email já utilizado!");
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [cnpj, setCnpj] = React.useState("");
@@ -35,6 +38,12 @@ function RegisterPage() {
       const resp = await emailCheckFunction(form); // next step
       if (!resp) {
         navigate("/foods-page", { state: form });
+      } else {
+        {
+          {
+            notify(toast);
+          }
+        }
       }
     }
   };
@@ -98,6 +107,7 @@ function RegisterPage() {
       >
         Próximo
       </button>
+      <ToastContainer />
 
       <div className="extrabuttons">
         <p className="link">
