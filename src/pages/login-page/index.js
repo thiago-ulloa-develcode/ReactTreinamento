@@ -16,18 +16,15 @@ function LoginPage() {
         Login
       </button>
       <div className="extrabuttons">
-        <p className="link"
-          onClick={() =>
-            window.location.assign("/forgotpassword")
-        }
+        <p
+          className="link"
+          onClick={() => window.location.assign("/forgotpassword")}
         >
           <a>Esqueci minha senha</a>
         </p>
         <p
           className="link"
-          onClick={() =>
-            window.location.assign("/register-page")
-          }
+          onClick={() => window.location.assign("/register-page")}
         >
           <a>Criar nova conta</a>
         </p>
@@ -61,4 +58,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-

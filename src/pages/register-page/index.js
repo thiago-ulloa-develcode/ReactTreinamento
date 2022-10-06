@@ -13,16 +13,12 @@ import "./index.css";
 
 function RegisterPage() {
   let navigate = useNavigate();
-  // https://www.w3schools.com/react/react_forms.asp
   const notify = () => toast("Email já utilizado!");
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [cnpj, setCnpj] = React.useState("");
   const [canSubmit, setCanSubmit] = React.useState(false);
 
-  // https://www.w3schools.com/js/js_comparisons.asp
-  // https://pt-br.reactjs.org/docs/hooks-effect.html
-  // https://www.w3schools.com/react/react_useeffect.asp
   React.useEffect(() => {
     setCanSubmit(password && email && cnpj.length === 18);
   }, [password, email, cnpj]);
@@ -48,9 +44,6 @@ function RegisterPage() {
     }
   };
 
-  // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-  // https://stackoverflow.com/questions/6259982/how-do-you-use-the-conditional-operator-in-javascript
-  // https://www.w3schools.com/react/react_es6_ternary.asp
   const disabledClass = !canSubmit ? "disabled-button" : "";
 
   async function emailCheckFunction(form) {
@@ -70,7 +63,6 @@ function RegisterPage() {
     }
   }
 
-  // https://pt-br.reactjs.org/docs/forms.html
   return (
     <div className="container">
       <div className="img-container">

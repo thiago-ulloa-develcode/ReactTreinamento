@@ -1,54 +1,53 @@
-
 .container {
-    margin: auto;
-    text-align: center;
-    background-color: #e6e6e6;
-    width: 45%;
-    max-width: 500px;
-    min-width: 400px;
-    border-radius: 5px;
+  margin: auto;
+  text-align: center;
+  background-color: #e6e6e6;
+  width: 45%;
+  max-width: 500px;
+  min-width: 400px;
+  border-radius: 5px;
 }
 input {
-    width: 90%;
-    padding: 12px 10px;
-    margin: 15px 0;
-    border-radius: 8px;
-    border: 0;
+  width: 90%;
+  padding: 12px 10px;
+  margin: 15px 0;
+  border-radius: 8px;
+  border: 0;
 }
 input::placeholder {
-    color: #11152A;
+  color: #11152a;
 }
 button {
-    width: 92%;
-    padding: 16px 24px;
-    background-color: #EA1D2C;
-    color: white;
-    margin: 4px 2px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 10px;
-    border: 0;
+  width: 92%;
+  padding: 16px 24px;
+  background-color: #ea1d2c;
+  color: white;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 0;
 }
 img {
-    height: 90px;
-    margin: auto;
+  height: 90px;
+  margin: auto;
 }
 .img-container {
-    width: 100%;
-    background-color: #BA0203;
-    padding: 30px 0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+  width: 100%;
+  background-color: #ba0203;
+  padding: 30px 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .link {
-    margin: 8px 0;
-    cursor: pointer;
-    width: fit-content;
+  margin: 8px 0;
+  cursor: pointer;
+  width: fit-content;
 }
 
 .extrabuttons {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
