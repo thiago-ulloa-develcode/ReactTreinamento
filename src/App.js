@@ -8,7 +8,6 @@ import FoodsPage from "./pages/register-page/foods-page";
 import AddressPage from "./pages/register-page/address-page";
 import "./App.css";
 
-
 function App() {
   return (
     <div className="App">
