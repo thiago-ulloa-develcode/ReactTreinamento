@@ -63,7 +63,7 @@ body {
   cursor: pointer;
   width: 35px;
   height: 35px;
-  margin: 20px;
+  margin-top: 15px;
 }
 
 #profilebutton {
@@ -73,7 +73,31 @@ body {
   cursor: pointer;
   width: 40px;
   height: 40px;
-  margin: 20px;
+  margin-top: 25px;
+}
+
+.menuSeparate {
+  display: flex;
+  align-items: center;
+}
+
+.menuImages {
+  width: 50px;
+}
+
+.textMenu {
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  width: 70px;
+  margin-left: 15px;
+}
+
+.text {
+  display: flex;
+  color: white;
+  font-size: 24px;
+  height: 10px;
 }
 
 .top-align {
@@ -85,13 +109,32 @@ body {
   display: flex;
   vertical-align: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.bottom-align {
+  display: flex;
+  flex-direction: column;
+  vertical-align: bottom;
+}
+
+.resHome {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 .promotionBox {
   width: 300px;
   border: 3px solid black;
   border-radius: 6px;
-  padding: 50px;
+  padding: 25px;
   margin: 20px;
   text-align: center !important;
+}
+
+#evaluationImage {
+  width: 100%;
+  height: auto;
 }
