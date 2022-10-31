@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import menuImage from "./images/menubar.png";
 import profileImage from "./images/profileicon.png";
 import homeBtnImage from "./images/homebutton.png";
+import promoImage from "./images/promotionex.jpg";
+import kfImage from "./images/kficon.png";
 import image0 from "./images/starsimages/0.png";
 import image05 from "./images/starsimages/0.5.png";
 import image1 from "./images/starsimages/1.png";
@@ -76,11 +78,17 @@ function HomePage() {
 
   // função para alternar texto de acordo com o menu
   function toggleText() {
-    var text = document.getElementById("textMenu");
+    var text = document.getElementById("hometext");
+    var text2 = document.getElementById("profiletext");
+    var text3 = document.getElementById("menutext");
     if (text.style.display === "flex") {
       text.style.display = "none";
+      text2.style.display = "none";
+      text3.style.display = "none";
     } else {
       text.style.display = "flex";
+      text2.style.display = "flex";
+      text3.style.display = "flex";
     }
   }
 
@@ -113,70 +121,94 @@ function HomePage() {
   function rateButton() {
     evaluationImage();
   }
-
   return (
     <div className="homepage">
-      <div className="headerseparate">
-        <div className={`sideMenu${toggleClassCheck}`}>
-          <div className="menubutton">
+      <div className={`sideMenu${toggleClassCheck}`}>
+        <div className="menubutton">
+          <img
+            src={menuImage}
+            id="menubutton"
+            alt="menubutton"
+            onClick={() => {
+              openNav();
+              toggleText();
+            }}
+          />
+        </div>
+        <div className="menuSeparate">
+          <div className="homeMenu">
             <img
-              src={menuImage}
-              id="menubutton"
-              alt="menubutton"
-              onClick={() => {
-                openNav();
-                toggleText();
-              }}
+              src={homeBtnImage}
+              id="homebutton"
+              alt="homebutton"
+              onClick={() => window.location.assign("/home")}
             />
+            <p id="hometext" className="text">
+              Home
+            </p>
           </div>
-          <div className="menuSeparate">
-            <div className="menuImages">
-              <img
-                src={homeBtnImage}
-                id="homebutton"
-                alt="homebutton"
-                onClick={() => window.location.assign("/home")}
-              />
-              <img
-                src={profileImage}
-                alt="profilebutton"
-                id="profilebutton"
-                onClick={() => window.location.assign("/profile-page")}
-              />
-            </div>
-            <div className="textMenu" id="textMenu">
-              <p className="text">Home</p>
-              <p className="text">Perfil</p>
-            </div>
+          <div className="profileMenu">
+            <img
+              src={profileImage}
+              alt="profilebutton"
+              id="profilebutton"
+              onClick={() => window.location.assign("/profile-page")}
+            />
+            <p id="profiletext" className="text">
+              Perfil
+            </p>
+          </div>
+          <div className="foodsMenu">
+            <img
+              src={kfImage}
+              id="foodtypebutton"
+              alt="foodtypebutton"
+              onClick={() => window.location.assign("/home")}
+            />
+            <p id="menutext" className="text">
+              Menu
+            </p>
           </div>
         </div>
-        <div className="resHome">
-          <div className="top-align">
-            <h1>{resName}</h1>
-          </div>
+      </div>
+      <div className="resHome">
+        <h1>{resName}</h1>
+        <div className="separateBoxes">
           <div className="center-align">
-            <div className="promotionBox">
+            <div className="evaluationBox">
               <h3>Sua nota</h3>
               <img src={resImage} id="evaluationImage" />
             </div>
+            <div className="promotionsBox">
+              <h3>Promoções ativas</h3>
+              <div className="promoImages">
+                <img src={promoImage} id="promotionImage" />
+                <img src={promoImage} id="promotionImage" />
+              </div>
+            </div>
           </div>
-          <div className="bottom-align">
-            <input
-              type="number"
-              placeholder="Insira sua nota"
-              min={1}
-              max={5}
-              value={resEvaluation}
-              onChange={(e) => setResEvaluation(e.target.value)}
-            ></input>
-            <button
-              onClick={() => {
-                rateButton();
-              }}
-            >
-              Avaliar
-            </button>
+          <div className="right-align">
+            <div className="clientsFeedbacks">
+              <h3>Avaliações dos Clientes</h3>
+            </div>
           </div>
+        </div>
+        <div className="bottom-align">
+          <input
+            type="number"
+            placeholder="Insira sua nota"
+            min={1}
+            max={5}
+            value={resEvaluation}
+            onChange={(e) => setResEvaluation(e.target.value)}
+          ></input>
+          <button
+            onClick={() => {
+              rateButton();
+            }}
+          >
+            Avaliar
+          </button>
         </div>
       </div>
     </div>

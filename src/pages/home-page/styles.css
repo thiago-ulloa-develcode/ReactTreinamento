@@ -76,25 +76,50 @@ body {
   margin-top: 25px;
 }
 
+#foodtypebutton {
+  display: flex;
+  outline: none;
+  border-style: hidden;
+  cursor: pointer;
+  width: auto;
+  height: 40px;
+  margin-top: 25px;
+}
+
 .menuSeparate {
   display: flex;
   align-items: center;
-}
-
-.menuImages {
-  width: 50px;
-}
-
-.textMenu {
-  display: none;
-  justify-content: center;
   flex-direction: column;
-  width: 70px;
-  margin-left: 15px;
+  justify-content: space-between;
+  width: 180px;
+}
+
+.homeMenu {
+  display: flex;
+  align-items: center;
+  justify-content: s;
+  text-align: center;
+  width: 120px;
+}
+
+.profileMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 120px;
+}
+
+.foodsMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 120px;
 }
 
 .text {
-  display: flex;
+  display: none;
   color: white;
   font-size: 24px;
   height: 10px;
@@ -105,9 +130,13 @@ body {
   text-align: center !important;
 }
 
+h1 {
+  vertical-align: top;
+  text-align: center !important;
+}
+
 .center-align {
   display: flex;
-  vertical-align: center;
   justify-content: center;
   flex-direction: column;
 }
@@ -125,13 +154,47 @@ body {
   height: 100%;
 }
 
-.promotionBox {
-  width: 300px;
+.separateBoxes {
+  display: flex;
+}
+
+.evaluationBox {
+  width: 450px;
   border: 3px solid black;
   border-radius: 6px;
   padding: 25px;
   margin: 20px;
   text-align: center !important;
+}
+
+.promotionsBox {
+  width: 450px;
+  border: 3px solid black;
+  border-radius: 6px;
+  padding: 25px;
+  margin: 20px;
+  text-align: center !important;
+}
+
+.clientsFeedbacks {
+  width: 450px;
+  height: 82%;
+  border: 3px solid black;
+  border-radius: 6px;
+  padding: 25px;
+  margin: 20px;
+  text-align: center !important;
+}
+
+.promoImages {
+  display: flex;
+  justify-content: center;
+}
+
+#promotionImage {
+  margin: 10px;
+  width: 220px;
+  height: auto;
 }
 
 #evaluationImage {
