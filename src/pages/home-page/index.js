@@ -32,6 +32,8 @@ function HomePage() {
     setBtnState((btnState) => !btnState);
   }
 
+  console.log(state);
+
   React.useEffect(() => {
     getRestaurant();
     // getRestaurantEvaluation();
@@ -58,7 +60,6 @@ function HomePage() {
   const onFetchSucess = (resData) => {
     setResName(resData.name);
     setResId(resData.id);
-    console.log(resData);
   };
 
   /* async function getRestaurantEvaluation() {

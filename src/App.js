@@ -4,8 +4,8 @@ import LoginPage from "./pages/login-page";
 import HomePage from "./pages/home-page";
 import RegisterPage from "./pages/register-page";
 import ForgotPassword from "./pages/forgotpassword";
-import FoodsPage from "./pages/register-page/foods-page";
-import AddressPage from "./pages/register-page/address-page";
+import FoodsPage from "./pages/foods-page/foods-page";
+import AddressPage from "./pages/address-page/address-page";
 import "./App.css";
 
 function App() {

@@ -1,5 +1,5 @@
 import "./index.css";
-import LogoDevelcode from "./logodevelcode.png";
+import LogoDevelcode from "../../images/logodevelcode.png";
 import React, { useState } from "react";
 import Select from "react-select";
 import { useLocation } from "react-router-dom";
@@ -15,7 +15,6 @@ function FoodsPage() {
 
   const { state } = useLocation();
   const { email, password, cnpj } = state;
-  console.log(state.email);
 
   const [resNumber, setPhoneNumber] = React.useState("");
   const [resName, setResName] = React.useState("");

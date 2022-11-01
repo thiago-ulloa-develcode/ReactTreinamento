@@ -1,5 +1,5 @@
 import "./index.css";
-import LogoDevelcode from "./logodevelcode.png";
+import LogoDevelcode from "../../images/logodevelcode.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

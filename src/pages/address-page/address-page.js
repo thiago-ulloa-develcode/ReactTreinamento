@@ -1,8 +1,9 @@
 import React from "react";
-import LogoDevelcode from "./logodevelcode.png";
+import LogoDevelcode from "../../images/logodevelcode.png";
 import { formatCep, isValidCep } from "../../utils/formValidation";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./index.css";
 import moment from "moment/moment";
 
@@ -24,7 +25,6 @@ function AddressPage() {
 
   const { state } = useLocation();
   const { email, password, cnpj, resName, resNumber, resFoodType } = state;
-  console.log(state);
 
   const disabledClass = !canSubmit ? "disabled-button" : "";
 
@@ -124,9 +124,24 @@ function AddressPage() {
         }),
       })
         .then((response) => response.json())
-        .then((json) => navigate("/home"))
         .catch((err) => console.log("Erro de solicitação", err));
-      navigate("/home");
+    }
+    if (!email || !password) {
+      return console.log("Erro de solicitação");
+    } else {
+      fetch("https://develfood-3.herokuapp.com/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf8",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((json) => navigate("/home", { state: json }))
+        .catch((err) => console.log("Erro de solicitação", err));
     }
   }
 }
