@@ -192,6 +192,7 @@ h1 {
 .promoImages {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 #promotionImage {
@@ -201,7 +202,7 @@ h1 {
 }
 
 #nopromotionImage {
-  width: 400px;
+  width: 350px;
   height: auto;
 }
 

@@ -36,6 +36,10 @@ function HomePage() {
   }
 
   React.useEffect(() => {
+    if (resEvaluation) evaluationImage();
+  }, [resEvaluation]);
+
+  React.useEffect(() => {
     getRestaurant();
     evaluationImage();
   }, []);
@@ -60,18 +64,13 @@ function HomePage() {
   const onFetchSucess = async (resData) => {
     setResName(resData.name);
     setResId(resData.id);
-    getRestaurantEvaluation(resData.id);
     getRestaurantPromotions(resData.id);
 
-    const resp = await getRestaurantEvaluation();
-    if (resp) {
-      setResEvaluation(resp);
-    }
+    const resp = await getRestaurantEvaluation(resData.id);
   };
 
   async function getRestaurantEvaluation(id) {
     try {
-      console.log(id);
       const response = await fetch(
         "https://develfood-3.herokuapp.com/restaurantEvaluation/" +
           id +
@@ -84,7 +83,8 @@ function HomePage() {
           },
         }
       );
-      return response.json;
+      const json = await response.json();
+      setResEvaluation(json);
     } catch (err) {
       console.log("Erro de solicitação", err);
     }
@@ -208,16 +208,14 @@ function HomePage() {
             <div className="promotionsBox">
               <h3>Promoções ativas</h3>
               <div className="promoImages">
-                <img src={promoImage} id="promotionImage" />
-                <img src={promoImage} id="promotionImage" />
+                <img src={noPromoImage} id="nopromotionImage" />
+                <h3>{promoMessage}</h3>
               </div>
             </div>
           </div>
           <div className="right-align">
             <div className="clientsFeedbacks">
               <h3>Avaliações dos Clientes</h3>
-              <img src={noPromoImage} id="nopromotionImage" />
-              <h3>{promoMessage}</h3>
             </div>
           </div>
         </div>
