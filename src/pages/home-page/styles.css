@@ -177,6 +177,9 @@ h1 {
 }
 
 .clientsFeedbacks {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   width: 450px;
   height: 82%;
   border: 3px solid black;
@@ -194,6 +197,11 @@ h1 {
 #promotionImage {
   margin: 10px;
   width: 220px;
+  height: auto;
+}
+
+#nopromotionImage {
+  width: 400px;
   height: auto;
 }
 

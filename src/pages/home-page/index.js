@@ -5,6 +5,7 @@ import profileImage from "./images/profileicon.png";
 import homeBtnImage from "./images/homebutton.png";
 import promoImage from "./images/promotionex.jpg";
 import kfImage from "./images/kficon.png";
+import noPromoImage from "../../images/nopromotionsimage.png";
 import image0 from "./images/starsimages/0.png";
 import image05 from "./images/starsimages/0.5.png";
 import image1 from "./images/starsimages/1.png";
@@ -20,6 +21,8 @@ import { useLocation } from "react-router-dom";
 
 function HomePage() {
   const [btnState, setBtnState] = React.useState(false);
+  const [promoMessage, setPromoMessage] = React.useState("");
+  const [resPromotions, setResPromotions] = React.useState("");
   const [resEvaluation, setResEvaluation] = React.useState("");
   const [resImage, setResImage] = React.useState("");
   const [resName, setResName] = React.useState(""); // Informações do restaurante
@@ -32,11 +35,8 @@ function HomePage() {
     setBtnState((btnState) => !btnState);
   }
 
-  console.log(state);
-
   React.useEffect(() => {
     getRestaurant();
-    // getRestaurantEvaluation();
     evaluationImage();
   }, []);
 
@@ -57,25 +57,53 @@ function HomePage() {
   };
 
   // Separar as informações do restaurante com o resultado do GET
-  const onFetchSucess = (resData) => {
+  const onFetchSucess = async (resData) => {
     setResName(resData.name);
     setResId(resData.id);
+    getRestaurantEvaluation(resData.id);
+    getRestaurantPromotions(resData.id);
+
+    const resp = await getRestaurantEvaluation();
+    if (resp) {
+      setResEvaluation(resp);
+    }
   };
 
-  /* async function getRestaurantEvaluation() {
-    await fetch(
-      "https://develfood-3.herokuapp.com/restaurantEvaluation/" + { resId },
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=utf8",
-          Authorization: "Bearer " + token,
-        },
-      }
-    )
+  async function getRestaurantEvaluation(id) {
+    try {
+      console.log(id);
+      const response = await fetch(
+        "https://develfood-3.herokuapp.com/restaurantEvaluation/" +
+          id +
+          "/grade",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json; charset=utf8",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      return response.json;
+    } catch (err) {
+      console.log("Erro de solicitação", err);
+    }
+  }
+
+  const getRestaurantPromotions = (id = resId) => {
+    fetch("https://develfood-3.herokuapp.com/restaurantPromotion/" + id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json; charset=utf8",
+        Authorization: "Bearer " + token,
+      },
+    })
       .then((response) => response.json())
-      .then((response) => console.log(response));
-  } */
+      .then((response) => setResPromotions(response));
+    if (!resPromotions.ok) {
+      setPromoMessage("Nenhuma promoção foi encontrada");
+    }
+  };
 
   // função para alternar texto de acordo com o menu
   function toggleText() {
@@ -93,7 +121,7 @@ function HomePage() {
     }
   }
 
-  function evaluationImage() {
+  const evaluationImage = () => {
     if (resEvaluation >= 5) {
       setResImage(image5);
     } else if (resEvaluation > 4.4 && resEvaluation < 5) {
@@ -117,11 +145,8 @@ function HomePage() {
     } else if (resEvaluation >= 0) {
       setResImage(image0);
     }
-  }
+  };
 
-  function rateButton() {
-    evaluationImage();
-  }
   return (
     <div className="homepage">
       <div className={`sideMenu${toggleClassCheck}`}>
@@ -191,26 +216,12 @@ function HomePage() {
           <div className="right-align">
             <div className="clientsFeedbacks">
               <h3>Avaliações dos Clientes</h3>
+              <img src={noPromoImage} id="nopromotionImage" />
+              <h3>{promoMessage}</h3>
             </div>
           </div>
         </div>
-        <div className="bottom-align">
-          <input
-            type="number"
-            placeholder="Insira sua nota"
-            min={1}
-            max={5}
-            value={resEvaluation}
-            onChange={(e) => setResEvaluation(e.target.value)}
-          ></input>
-          <button
-            onClick={() => {
-              rateButton();
-            }}
-          >
-            Avaliar
-          </button>
-        </div>
+        <div className="bottom-align"></div>
       </div>
     </div>
   );
