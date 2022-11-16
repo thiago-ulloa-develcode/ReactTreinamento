@@ -181,7 +181,7 @@ h1 {
   justify-content: center;
   flex-direction: column;
   width: 450px;
-  height: 82%;
+  height: 535px;
   border: 3px solid black;
   border-radius: 6px;
   padding: 25px;
@@ -209,4 +209,51 @@ h1 {
 #evaluationImage {
   width: 100%;
   height: auto;
+}
+
+#evImage1 {
+  width: auto;
+  height: 25.5px;
+}
+
+.feedback1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 405px;
+  height: 125px;
+  border: 3px solid black;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center !important;
+  background-color: floralwhite;
+}
+
+.feedback2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 405px;
+  height: 125px;
+  border: 3px solid black;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center !important;
+  background-color: floralwhite;
+}
+
+.feedback3 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 405px;
+  height: 125px;
+  border: 3px solid black;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center !important;
+  background-color: floralwhite;
 }
