@@ -1,5 +1,6 @@
 import "./styles.css";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import menuImage from "./images/menubar.png";
 import profileImage from "./images/profileicon.png";
 import homeBtnImage from "./images/homebutton.png";
@@ -20,6 +21,7 @@ import image5 from "./images/starsimages/5.png";
 import { useLocation } from "react-router-dom";
 
 function HomePage() {
+  let navigate = useNavigate();
   const [btnState, setBtnState] = React.useState(false);
   const [promoMessage, setPromoMessage] = React.useState("");
   const [resPromotions, setResPromotions] = React.useState("");
@@ -282,7 +284,7 @@ function HomePage() {
               src={profileImage}
               alt="profilebutton"
               id="profilebutton"
-              onClick={() => window.location.assign("/profile-page")}
+              onClick={() => navigate("/profile-page", { state: state })}
             />
             <p id="profiletext" className="text">
               Perfil
