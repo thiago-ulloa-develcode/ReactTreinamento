@@ -93,6 +93,7 @@ function HomePage() {
     setResName(resData.name);
     setResId(resData.id);
     getRestaurantPromotions(resData.id);
+    console.log(resData);
 
     const resp = await getRestaurantEvaluation(resData.id);
   };
