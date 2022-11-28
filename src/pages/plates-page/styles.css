@@ -1,0 +1,71 @@
+.resProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.profile-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 900px;
+  height: 700px;
+  padding: 20px;
+  border: 3px solid black;
+  border-radius: 6px;
+  text-align: center !important;
+}
+
+#inputdata {
+  width: 40%;
+  margin: 15px 10px;
+  border-radius: 8px;
+  border: 1px;
+  border-color: gray;
+  border-style: solid;
+}
+
+#inputmatriz {
+  width: 84.5%;
+  margin: 15px 10px;
+  border-radius: 8px;
+  border: 1px;
+  border-color: gray;
+  border-style: solid;
+}
+
+#extralinks {
+  margin: 23px 15px;
+  width: 375px;
+  color: blue;
+  text-decoration: underline;
+}
+
+#extralinks:hover {
+  color: green;
+}
+
+.inputs1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.inputs2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  width: 88%;
+}

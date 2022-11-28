@@ -64,6 +64,27 @@ function ProfilePage() {
       .catch((err) => console.log("Erro de solicitação", err));
   };
 
+  function updateData() {
+    if (!email) {
+      return console.log("Erro de solicitação");
+    } else {
+      fetch("https://develfood-3.herokuapp.com/restaurant/" + resId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json; charset=utf8",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          address: {
+            street: street,
+          },
+        }),
+      })
+        .then((response) => response.json())
+        .catch((err) => console.log("Erro de solicitação", err));
+    }
+  }
+
   // função para setar os dados do restaurante de acordo com o retorno do GET
   const onFetchSucess = async (resData) => {
     setResName(resData.name);
@@ -78,6 +99,7 @@ function ProfilePage() {
     setStreet(resData.address.street);
     setUf(resData.address.state);
     setCep(resData.address.zipCode);
+    console.log(token);
   };
 
   // função para alternar texto de acordo com o menu
@@ -138,7 +160,7 @@ function ProfilePage() {
               src={kfImage}
               id="foodtypebutton"
               alt="foodtypebutton"
-              onClick={() => window.location.assign("/home")}
+              onClick={() => window.location.assign("/plates-page")}
             />
             <p id="menutext" className="text">
               Menu
@@ -191,6 +213,7 @@ function ProfilePage() {
                   placeholder="(XX) XXXXX-XXXX"
                   defaultValue={phone}
                   id="inputdata"
+                  onChange={(e) => setPhone(e.target.value)}
                 />
                 <p
                   className="link"
@@ -207,6 +230,7 @@ function ProfilePage() {
                 placeholder="Matriz"
                 defaultValue={headquarters}
                 id="inputmatriz"
+                onChange={(e) => setHeadquarters(e.target.value)}
               />
               <div className="inputs2">
                 <input
@@ -215,6 +239,7 @@ function ProfilePage() {
                   placeholder="Rua"
                   defaultValue={street}
                   id="inputdata"
+                  onChange={(e) => setStreet(e.target.value)}
                 />
                 <input
                   type="text"
@@ -222,6 +247,7 @@ function ProfilePage() {
                   placeholder="Bairro"
                   defaultValue={neighborhood}
                   id="inputdata"
+                  onChange={(e) => setNeighborhood(e.target.value)}
                 />
                 <input
                   type="text"
@@ -229,6 +255,7 @@ function ProfilePage() {
                   placeholder="N°"
                   defaultValue={number}
                   id="inputdata"
+                  onChange={(e) => setNumber(e.target.value)}
                 />
                 <input
                   type="text"
@@ -236,6 +263,7 @@ function ProfilePage() {
                   placeholder="CEP"
                   defaultValue={cep}
                   id="inputdata"
+                  onChange={(e) => setCep(e.target.value)}
                 />
                 <input
                   type="text"
@@ -243,6 +271,7 @@ function ProfilePage() {
                   placeholder="Cidade"
                   defaultValue={city}
                   id="inputdata"
+                  onChange={(e) => setCity(e.target.value)}
                 />
                 <input
                   type="text"
@@ -250,9 +279,12 @@ function ProfilePage() {
                   placeholder="UF"
                   defaultValue={uf}
                   id="inputdata"
+                  onChange={(e) => setUf(e.target.value)}
                 />
               </div>
-              <button type="button">Salvar</button>
+              <button type="button" onClick={() => updateData()}>
+                Salvar
+              </button>
             </div>
           </div>
           <div className="right-align"></div>

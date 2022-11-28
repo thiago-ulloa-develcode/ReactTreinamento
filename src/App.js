@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/forgotpassword";
 import FoodsPage from "./pages/foods-page/foods-page";
 import AddressPage from "./pages/address-page/address-page";
 import ProfilePage from "./pages/profile-page";
+import PlatesPage from "./pages/plates-page";
 import "./App.css";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/address-page" element={<AddressPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
+        <Route path="/plates-page" element={<PlatesPage />} />
       </Routes>
     </div>
   );
