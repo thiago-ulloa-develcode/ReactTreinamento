@@ -296,7 +296,7 @@ function HomePage() {
               src={kfImage}
               id="foodtypebutton"
               alt="foodtypebutton"
-              onClick={() => window.location.assign("/home")}
+              onClick={() => window.location.assign("/plates-page")}
             />
             <p id="menutext" className="text">
               Menu

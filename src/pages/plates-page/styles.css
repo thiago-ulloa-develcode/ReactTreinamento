@@ -1,71 +1,88 @@
-.resProfile {
+.platesPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 10px;
+  width: 100%;
+  height: 100%;
 }
 
-.profile-data {
+.plateFunctions {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  flex-direction: column;
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+.centerDivide {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 900px;
-  height: 700px;
-  padding: 20px;
+}
+
+#pltsrcInput {
+  border: 1px;
+  border-color: gray;
+  border-style: solid;
+  width: 80%;
+}
+
+.plateslist {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 1000px;
+  height: 100%;
+}
+
+.plate1,
+.plate2,
+.plate3,
+.plate4,
+.plate5,
+.plate6 {
+  content-visibility: hidden;
+  width: 280px;
+  height: 200px;
   border: 3px solid black;
   border-radius: 6px;
+  margin: 15px;
   text-align: center !important;
+  background-image: url(./images/promotionex.jpg);
+  background-size: cover;
 }
 
-#inputdata {
-  width: 40%;
-  margin: 15px 10px;
-  border-radius: 8px;
-  border: 1px;
-  border-color: gray;
-  border-style: solid;
-}
-
-#inputmatriz {
-  width: 84.5%;
-  margin: 15px 10px;
-  border-radius: 8px;
-  border: 1px;
-  border-color: gray;
-  border-style: solid;
-}
-
-#extralinks {
-  margin: 23px 15px;
-  width: 375px;
-  color: blue;
-  text-decoration: underline;
-}
-
-#extralinks:hover {
-  color: green;
-}
-
-.inputs1 {
+.plate1:hover,
+.plate2:hover,
+.plate3:hover,
+.plate4:hover,
+.plate5:hover,
+.plate6:hover {
+  content-visibility: visible;
   display: flex;
   justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+  align-items: center;
+  width: 280px;
+  height: 200px;
+  border: 3px solid darkgrey;
+  border-radius: 6px;
+  margin: 15px;
+  text-align: center !important;
+  background-image: url(./images/promotionex.jpg);
+  filter: grayscale(70%);
+  background-size: cover;
 }
 
-.inputs2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+#editbutton,
+#deletebutton {
+  width: 24%;
+  height: auto;
+  background-color: white;
+  border-radius: 15px;
 }
 
-button {
-  width: 88%;
+#editbutton:hover,
+#deletebutton:hover {
+  cursor: pointer;
 }
