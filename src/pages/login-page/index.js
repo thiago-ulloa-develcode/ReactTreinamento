@@ -1,5 +1,6 @@
 import "./index.css";
 import LogoDevelcode from "../../images/logodevelcode.png";
+import { loginFunction } from "../../services/user";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -9,6 +10,12 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const form = {};
+
+  function handleLogin() {
+    loginFunction(email, password).then((user) =>
+      navigate("/home", { state: user })
+    );
+  }
 
   return (
     <div className="container">
@@ -31,7 +38,7 @@ function LoginPage() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="button" onClick={() => loginFunction()}>
+      <button type="button" onClick={() => handleLogin()}>
         Login
       </button>
       <div className="extrabuttons">
@@ -50,29 +57,6 @@ function LoginPage() {
       </div>
     </div>
   );
-
-  function loginFunction() {
-    if (
-      !document.getElementById("email").value ||
-      !document.getElementById("senha").value
-    ) {
-      return console.log("Erro de solicitação");
-    } else {
-      fetch("https://develfood-3.herokuapp.com/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf8",
-        },
-        body: JSON.stringify({
-          email: document.getElementById("email").value,
-          password: document.getElementById("senha").value,
-        }),
-      })
-        .then((response) => response.json())
-        .then((json) => navigate("/home", { state: json }))
-        .catch((err) => console.log("Erro de solicitação", err));
-    }
-  }
 }
 
 export default LoginPage;

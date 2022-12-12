@@ -80,14 +80,14 @@ function AddressPage() {
       <button
         type="button"
         className={disabledClass}
-        onClick={() => crtAccFunction()}
+        onClick={() => createAccount()}
       >
         Próximo
       </button>
     </div>
   );
 
-  function crtAccFunction() {
+  function createAccount() {
     if (!cep || !number || !city || !neighborhood || !street) {
       return console.log("Erro de solicitação");
     } else {
