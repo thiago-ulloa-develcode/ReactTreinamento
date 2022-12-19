@@ -18,20 +18,16 @@ import image35 from "./images/starsimages/3.5.png";
 import image4 from "./images/starsimages/4.png";
 import image45 from "./images/starsimages/4.5.png";
 import image5 from "./images/starsimages/5.png";
+import { getRestaurant } from "../../services/restaurant";
 import { useLocation } from "react-router-dom";
 
 function HomePage() {
   let navigate = useNavigate();
   const [btnState, setBtnState] = React.useState(false);
-  const [promoMessage, setPromoMessage] = React.useState("");
-  const [resPromotions, setResPromotions] = React.useState("");
-  const [resEvaluation, setResEvaluation] = React.useState("");
   const [resImage, setResImage] = React.useState("");
   const [evImage1, setEvImage1] = React.useState("");
   const [evImage2, setEvImage2] = React.useState("");
   const [evImage3, setEvImage3] = React.useState("");
-  const [resName, setResName] = React.useState(""); // Informações do restaurante
-  const [resId, setResId] = React.useState(""); // Informações do restaurante
 
   const { state } = useLocation();
   const { token } = state;
@@ -58,12 +54,12 @@ function HomePage() {
     setBtnState((btnState) => !btnState);
   }
 
-  React.useEffect(() => {
-    if (resEvaluation) evaluationImage();
-  }, [resEvaluation]);
+  //React.useEffect(() => {
+  //  if (resEvaluation) evaluationImage();
+  //}, [resEvaluation]);
 
   React.useEffect(() => {
-    getRestaurant();
+    getRestaurant(token);
     evaluationImage();
     evaluationImageFd1();
     evaluationImageFd2();
@@ -71,68 +67,6 @@ function HomePage() {
   }, []);
 
   let toggleClassCheck = btnState ? "-open" : "";
-
-  // Função para chamar as mensagens de avaliação dos clientes
-
-  // Função GET com utilização do token
-  const getRestaurant = () => {
-    fetch("https://develfood-3.herokuapp.com/restaurant/auth", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json; charset=utf8",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => onFetchSucess(response))
-      .catch((err) => console.log("Erro de solicitação", err));
-  };
-
-  // Separar as informações do restaurante com o resultado do GET
-  const onFetchSucess = async (resData) => {
-    setResName(resData.name);
-    setResId(resData.id);
-    getRestaurantPromotions(resData.id);
-    console.log(resData);
-
-    const resp = await getRestaurantEvaluation(resData.id);
-  };
-
-  async function getRestaurantEvaluation(id) {
-    try {
-      const response = await fetch(
-        "https://develfood-3.herokuapp.com/restaurantEvaluation/" +
-          id +
-          "/grade",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json; charset=utf8",
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      const json = await response.json();
-      setResEvaluation(json);
-    } catch (err) {
-      console.log("Erro de solicitação", err);
-    }
-  }
-
-  const getRestaurantPromotions = (id = resId) => {
-    fetch("https://develfood-3.herokuapp.com/restaurantPromotion/" + id, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json; charset=utf8",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => setResPromotions(response));
-    if (!resPromotions.ok) {
-      setPromoMessage("Nenhuma promoção foi encontrada");
-    }
-  };
 
   // função para alternar texto de acordo com o menu
   function toggleText() {
@@ -150,7 +84,7 @@ function HomePage() {
     }
   }
 
-  const evaluationImage = () => {
+  /*  const evaluationImage = () => {
     if (resEvaluation >= 5) {
       setResImage(image5);
     } else if (resEvaluation > 4.4 && resEvaluation < 5) {
@@ -253,7 +187,7 @@ function HomePage() {
       setEvImage3(image0);
     }
   };
-
+*/
   return (
     <div className="homepage">
       <div className={`sideMenu${toggleClassCheck}`}>
