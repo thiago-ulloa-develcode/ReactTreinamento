@@ -1,13 +1,5 @@
-import React, { useState } from "react";
-
-const [resName, setResName] = React.useState(""); // Informações do restaurante
-const [resId, setResId] = React.useState(""); // Informações do restaurante
-const [resPromotions, setResPromotions] = React.useState("");
-const [resEvaluation, setResEvaluation] = React.useState("");
-const [promoMessage, setPromoMessage] = React.useState("");
-
-export async function getRestaurant(token) {
-  fetch("https://develfood-3.herokuapp.com/restaurant/auth", {
+export async function getRestaurantFetch(token) {
+  return fetch("https://develfood-3.herokuapp.com/restaurant/auth", {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf8",
@@ -15,8 +7,8 @@ export async function getRestaurant(token) {
     },
   })
     .then((response) => response.json())
-    .then((response) => onFetchSucess(response))
-    .catch((err) => onFetchSucess(restaurantMock));
+    .then((response) => response)
+    .catch((err) => restaurantMock);
 }
 
 const restaurantMock = {
@@ -25,16 +17,7 @@ const restaurantMock = {
   name: "Restaurante Fake",
 };
 
-const onFetchSucess = async (resData) => {
-  setResName(resData.name);
-  setResId(resData.id);
-  getRestaurantPromotions(resData.id);
-  console.log(resData);
-
-  const resp = await getRestaurantEvaluation(resData.id);
-};
-
-async function getRestaurantEvaluation(id, token) {
+export async function getRestaurantEvaluation(id, token) {
   try {
     const response = await fetch(
       "https://develfood-3.herokuapp.com/restaurantEvaluation/" + id + "/grade",
@@ -47,9 +30,9 @@ async function getRestaurantEvaluation(id, token) {
       }
     );
     const json = await response.json();
-    setResEvaluation(json);
+    return json;
   } catch (err) {
-    setResEvaluation(restaurantEvMock.grade);
+    return restaurantEvMock;
   }
 }
 
@@ -57,8 +40,8 @@ const restaurantEvMock = {
   grade: 3,
 };
 
-const getRestaurantPromotions = (id = resId, token) => {
-  fetch("https://develfood-3.herokuapp.com/restaurantPromotion/" + id, {
+export async function getRestaurantPromotions(id, token) {
+  return fetch("https://develfood-3.herokuapp.com/restaurantPromotion/" + id, {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf8",
@@ -66,11 +49,32 @@ const getRestaurantPromotions = (id = resId, token) => {
     },
   })
     .then((response) => response.json())
-    .then((response) => setResPromotions(response))
-    .catch((err) => setResPromotions(promotionsMock));
-  if (!resPromotions.ok) {
-    setPromoMessage("Nenhuma promoção foi encontrada");
-  }
+    .then((response) => response)
+    .catch((err) => promotionsMock);
+}
+
+const promotionsMock = {
+  message: "Nenhuma promoção disponível",
 };
 
-const promotionsMock = {};
+export async function getRestaurantFeedbacks() {
+  return feedbacks;
+}
+
+const feedbacks = {
+  feedback1: {
+    message: "A comida desse lugar é ótima, uma pena que o pedido atrasou.",
+    evaluation: 4,
+    date: "15/11/2022",
+  },
+  feedback2: {
+    message: "A comida estava ótima.",
+    evaluation: 4.5,
+    date: "12/11/2022",
+  },
+  feedback3: {
+    message: "A comida desse lugar é ótima, mas esqueceram parte do pedido.",
+    evaluation: 2,
+    date: "10/11/2022",
+  },
+};
