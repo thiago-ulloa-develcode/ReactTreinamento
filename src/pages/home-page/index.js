@@ -37,7 +37,23 @@ function HomePage() {
   const [resId, setResId] = React.useState(""); // Informações do restaurante
   const [resEvaluation, setResEvaluation] = React.useState("");
   const [promoMessage, setPromoMessage] = React.useState("");
-  const [resFeedbacks, setResFeedbacks] = React.useState("");
+  const [resFeedbacks, setResFeedbacks] = React.useState({
+    feedback1: {
+      message: "",
+      evaluation: 0,
+      date: "",
+    },
+    feedback2: {
+      message: "",
+      evaluation: 0,
+      date: "",
+    },
+    feedback3: {
+      message: "",
+      evaluation: 0,
+      date: "",
+    },
+  });
 
   const { state } = useLocation();
   const { token } = state;
@@ -48,7 +64,10 @@ function HomePage() {
 
   React.useEffect(() => {
     if (resEvaluation) evaluationImage();
-  }, [resEvaluation]);
+    if (resFeedbacks) evaluationImageFd1();
+    if (resFeedbacks) evaluationImageFd2();
+    if (resFeedbacks) evaluationImageFd3();
+  }, [resEvaluation, resFeedbacks]);
 
   React.useEffect(() => {
     getRestaurant();
@@ -311,21 +330,27 @@ function HomePage() {
           <div className="right-align">
             <div className="clientsFeedbacks">
               <h3>Avaliações dos Clientes</h3>
-              <div className="feedback1">
-                <p>{resFeedbacks.feedback1.message}</p>
-                <img src={evImage1} id="evImage1" />
-                <p>{resFeedbacks.feedback1.date}</p>
-              </div>
-              <div className="feedback2">
-                <p>{resFeedbacks.feedback2.message}</p>
-                <img src={evImage2} id="evImage1" />
-                <p>{resFeedbacks.feedback2.date}</p>
-              </div>
-              <div className="feedback3">
-                <p>{resFeedbacks.feedback3.message}</p>
-                <img src={evImage3} id="evImage1" />
-                <p>{resFeedbacks.feedback3.date}</p>
-              </div>
+              {resFeedbacks?.feedback1 && (
+                <div className="feedback1">
+                  <p>{resFeedbacks.feedback1.message}</p>
+                  <img src={evImage1} id="evImage1" />
+                  <p>{resFeedbacks.feedback1.date}</p>
+                </div>
+              )}
+              {resFeedbacks?.feedback2 && (
+                <div className="feedback2">
+                  <p>{resFeedbacks.feedback2.message}</p>
+                  <img src={evImage2} id="evImage1" />
+                  <p>{resFeedbacks.feedback2.date}</p>
+                </div>
+              )}
+              {resFeedbacks?.feedback3 && (
+                <div className="feedback3">
+                  <p>{resFeedbacks.feedback3.message}</p>
+                  <img src={evImage3} id="evImage1" />
+                  <p>{resFeedbacks.feedback3.date}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
