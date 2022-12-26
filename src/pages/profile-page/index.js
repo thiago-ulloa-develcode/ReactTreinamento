@@ -6,6 +6,13 @@ import menuImage from "./images/menubar.png";
 import profileImage from "./images/profileicon.png";
 import homeBtnImage from "./images/homebutton.png";
 import kfImage from "./images/kficon.png";
+import {
+  getRestaurantFetch,
+  getRestaurantEvaluation,
+  getRestaurantPromotions,
+  getRestaurantFeedbacks,
+  getAuthFetch,
+} from "../../services/restaurant";
 
 function ProfilePage() {
   let navigate = useNavigate();
@@ -38,30 +45,14 @@ function ProfilePage() {
 
   let toggleClassCheck = btnState ? "-open" : "";
 
-  const getRestaurant = () => {
-    fetch("https://develfood-3.herokuapp.com/restaurant/auth", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json; charset=utf8",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => onFetchSucess(response))
-      .catch((err) => console.log("Erro de solicitação", err));
+  const getRestaurant = async () => {
+    const restaurant = await getRestaurantFetch(token);
+    onFetchSucess(restaurant);
   };
 
-  const getAuth = () => {
-    fetch("https://develfood-3.herokuapp.com/auth", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json; charset=utf8",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => setEmail(response.email))
-      .catch((err) => console.log("Erro de solicitação", err));
+  const getAuth = async () => {
+    const auth = await getAuthFetch(token);
+    setEmail(auth.email);
   };
 
   function updateData() {

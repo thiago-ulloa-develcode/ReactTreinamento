@@ -13,8 +13,9 @@ export async function getRestaurantFetch(token) {
 
 const restaurantMock = {
   id: 193,
-  email: "emailfake@develcode.com.br",
   name: "Restaurante Fake",
+  cnpj: 67616366000160,
+  phone: 11970839813,
 };
 
 export async function getRestaurantEvaluation(id, token) {
@@ -77,4 +78,21 @@ const feedbacks = {
     evaluation: 2,
     date: "10/11/2022",
   },
+};
+
+export async function getAuthFetch(token) {
+  return fetch("https://develfood-3.herokuapp.com/auth", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json; charset=utf8",
+      Authorization: "Bearer " + token,
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => response)
+    .catch((err) => authMock);
+}
+
+const authMock = {
+  email: "emailfake@develcode.com.br",
 };
