@@ -28,6 +28,21 @@ function ProfilePage() {
   const [city, setCity] = React.useState("");
   const [uf, setUf] = React.useState("");
   const [resId, setResId] = React.useState(""); // Informações do restaurante
+  const [restaurantData, setRestaurantData] = React.useState({
+    id: 0,
+    name: "",
+    cnpj: 0,
+    phone: "",
+    address: {
+      city: "",
+      neighborhood: "",
+      number: "",
+      street: "",
+      state: "",
+      zipCode: "",
+      nickname: "",
+    },
+  });
 
   const { state } = useLocation();
   const { token } = state;
@@ -40,6 +55,10 @@ function ProfilePage() {
     getRestaurant();
     getAuth();
   }, []);
+
+  React.useEffect(() => {
+    if (restaurantData) onFetchSucess();
+  }, [restaurantData]);
 
   let toggleClassCheck = btnState ? "-open" : "";
 
@@ -57,19 +76,19 @@ function ProfilePage() {
 
   // função para setar os dados do restaurante de acordo com o retorno do GET
   const onFetchSucess = async (resData) => {
-    setResName(resData.name);
-    setResId(resData.id);
-    setCNPJ(resData.cnpj);
-    setHeadquarters(resData.address.nickname);
-    setPhone(resData.phone);
+    setRestaurantData(resData);
+    setResName(restaurantData.name);
+    setResId(restaurantData.id);
+    setCNPJ(restaurantData.cnpj);
+    setHeadquarters(restaurantData.address.nickname);
+    setPhone(restaurantData.phone);
     // setFoodType(resData.food_types[0].name);
-    setCity(resData.address.city);
-    setNeighborhood(resData.address.neighborhood);
-    setNumber(resData.address.number);
-    setStreet(resData.address.street);
-    setUf(resData.address.state);
-    setCep(resData.address.zipCode);
-    console.log(token);
+    setCity(restaurantData.city);
+    setNeighborhood(restaurantData.address.neighborhood);
+    setNumber(restaurantData.address.number);
+    setStreet(restaurantData.address.street);
+    setUf(restaurantData.address.state);
+    setCep(restaurantData.address.zipCode);
   };
 
   // função para alternar texto de acordo com o menu
