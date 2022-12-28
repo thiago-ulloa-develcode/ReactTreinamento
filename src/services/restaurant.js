@@ -15,7 +15,16 @@ const restaurantMock = {
   id: 193,
   name: "Restaurante Fake",
   cnpj: 67616366000160,
-  phone: 11970839813,
+  phone: "11970839813",
+  address: {
+    city: "São Paulo",
+    neighborhood: "Jabaquara",
+    number: "196",
+    street: "Rua Domiciano Leite Ribeiro",
+    state: "SP",
+    zipCode: "09551310",
+    nickname: "Salão 1",
+  },
 };
 
 export async function getRestaurantEvaluation(id, token) {
@@ -96,3 +105,21 @@ export async function getAuthFetch(token) {
 const authMock = {
   email: "emailfake@develcode.com.br",
 };
+
+// Ainda preciso configurar
+export async function updateDataFetch(resId, token, street) {
+  return fetch("https://develfood-3.herokuapp.com/restaurant/" + resId, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json; charset=utf8",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify({
+      address: {
+        street: street,
+      },
+    }),
+  })
+    .then((response) => response.json())
+    .catch((err) => console.log("Erro de solicitação", err));
+}

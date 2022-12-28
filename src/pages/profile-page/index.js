@@ -8,10 +8,8 @@ import homeBtnImage from "./images/homebutton.png";
 import kfImage from "./images/kficon.png";
 import {
   getRestaurantFetch,
-  getRestaurantEvaluation,
-  getRestaurantPromotions,
-  getRestaurantFeedbacks,
   getAuthFetch,
+  updateDataFetch,
 } from "../../services/restaurant";
 
 function ProfilePage() {
@@ -55,26 +53,7 @@ function ProfilePage() {
     setEmail(auth.email);
   };
 
-  function updateData() {
-    if (!email) {
-      return console.log("Erro de solicitação");
-    } else {
-      fetch("https://develfood-3.herokuapp.com/restaurant/" + resId, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json; charset=utf8",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify({
-          address: {
-            street: street,
-          },
-        }),
-      })
-        .then((response) => response.json())
-        .catch((err) => console.log("Erro de solicitação", err));
-    }
-  }
+  const updateData = async () => {};
 
   // função para setar os dados do restaurante de acordo com o retorno do GET
   const onFetchSucess = async (resData) => {
@@ -83,7 +62,7 @@ function ProfilePage() {
     setCNPJ(resData.cnpj);
     setHeadquarters(resData.address.nickname);
     setPhone(resData.phone);
-    setFoodType(resData.food_types[0].name);
+    // setFoodType(resData.food_types[0].name);
     setCity(resData.address.city);
     setNeighborhood(resData.address.neighborhood);
     setNumber(resData.address.number);
