@@ -6,6 +6,7 @@ import menuImage from "./images/menubar.png";
 import profileImage from "./images/profileicon.png";
 import homeBtnImage from "./images/homebutton.png";
 import kfImage from "./images/kficon.png";
+import { formatCNPJ } from "../../utils/formValidation";
 import {
   getRestaurantFetch,
   getAuthFetch,
@@ -31,7 +32,7 @@ function ProfilePage() {
   const [restaurantData, setRestaurantData] = React.useState({
     id: 0,
     name: "",
-    cnpj: 0,
+    cnpj: "",
     phone: "",
     address: {
       city: "",
@@ -79,7 +80,7 @@ function ProfilePage() {
     setRestaurantData(resData);
     setResName(restaurantData.name);
     setResId(restaurantData.id);
-    setCNPJ(restaurantData.cnpj);
+    setCNPJ(formatCNPJ(restaurantData.cnpj));
     setHeadquarters(restaurantData.address.nickname);
     setPhone(restaurantData.phone);
     // setFoodType(resData.food_types[0].name);

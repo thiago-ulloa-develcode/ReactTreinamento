@@ -14,7 +14,7 @@ export async function getRestaurantFetch(token) {
 const restaurantMock = {
   id: 193,
   name: "Restaurante Fake",
-  cnpj: 67616366000160,
+  cnpj: "10293847561029",
   phone: "11970839813",
   address: {
     city: "São Paulo",
