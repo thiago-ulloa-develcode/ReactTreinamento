@@ -8,6 +8,7 @@ import FoodsPage from "./pages/foods-page/foods-page";
 import AddressPage from "./pages/address-page/address-page";
 import ProfilePage from "./pages/profile-page";
 import PlatesPage from "./pages/plates-page";
+import NewPlatePage from "./pages/newplate-page";
 import "./App.css";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/address-page" element={<AddressPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/plates-page" element={<PlatesPage />} />
+        <Route path="/newplate-page" element={<NewPlatePage />} />
       </Routes>
     </div>
   );

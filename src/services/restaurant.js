@@ -1,3 +1,5 @@
+import plateImageMock from "../images/biscoitogatinho.png";
+
 export async function getRestaurantFetch(token) {
   return fetch("https://develfood-3.herokuapp.com/restaurant/auth", {
     method: "GET",
@@ -123,3 +125,14 @@ export async function updateDataFetch(resId, token, street) {
     .then((response) => response.json())
     .catch((err) => console.log("Erro de solicitação", err));
 }
+
+export async function Plate1() {
+  return platemock;
+}
+
+const platemock = {
+  name: "Buxada de gato",
+  description:
+    "A melhor buxada que você vai comer na sua vida. Qual carne usamos? Preferimos não tocar nesse assunto.",
+  image: plateImageMock,
+};

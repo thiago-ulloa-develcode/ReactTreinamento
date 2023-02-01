@@ -1,0 +1,67 @@
+.editPlatesPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.centerDivide {
+  display: flex;
+  flex-direction: column;
+}
+
+#pltsrcInput {
+  border: 1px;
+  border-color: gray;
+  border-style: solid;
+  width: 80%;
+}
+
+#pltdscInput {
+  border: 1px;
+  border-color: gray;
+  border-style: solid;
+  height: 200px;
+}
+
+#priceInput {
+  border: 1px;
+  border-color: gray;
+  border-style: solid;
+  width: 46%;
+}
+
+#fdTypeInput {
+  border: 1px;
+  border-color: gray;
+  border-style: solid;
+  width: 46%;
+}
+
+textarea {
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  width: 82%;
+  resize: none;
+}
+
+.editplate {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 1000px;
+  height: 100%;
+}
+
+button {
+  width: 83%;
+}
+
+.mergeInputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 82%;
+}

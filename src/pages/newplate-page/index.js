@@ -8,14 +8,12 @@ import homeBtnImage from "./images/homebutton.png";
 import kfImage from "./images/kficon.png";
 import editIcon from "./images/editicon.png";
 import deleteIcon from "./images/deleteicon.png";
-import { getRestaurantFetch, Plate1 } from "../../services/restaurant";
-import { getByPlaceholderText } from "@testing-library/react";
+import { getRestaurantFetch } from "../../services/restaurant";
 
-function PlatesPage() {
+function NewPlatePage() {
   let navigate = useNavigate();
   const [btnState, setBtnState] = React.useState(false);
   const [resName, setResName] = React.useState("");
-  const [plate, setPlate] = React.useState("");
 
   const { state } = useLocation();
   const { token } = state;
@@ -26,7 +24,6 @@ function PlatesPage() {
 
   React.useEffect(() => {
     getRestaurant();
-    getPlate();
   }, []);
 
   let toggleClassCheck = btnState ? "-open" : "";
@@ -38,11 +35,6 @@ function PlatesPage() {
 
   const onFetchSucess = async (resData) => {
     setResName(resData.name);
-  };
-
-  const getPlate = async () => {
-    const plate = await Plate1();
-    console.log(plate.name);
   };
 
   // função para alternar texto de acordo com o menu
@@ -62,7 +54,7 @@ function PlatesPage() {
   }
 
   return (
-    <div className="platesPage">
+    <div className="editPlatesPage">
       <div className={`sideMenu${toggleClassCheck}`}>
         <div className="menubutton">
           <img
@@ -111,79 +103,46 @@ function PlatesPage() {
           </div>
         </div>
       </div>
-      <h1>Menu do Restaurante:</h1>
-      <h1>{resName}</h1>
+      <h1>Cadastro/Edição de Prato</h1>
       <div className="centerDivide">
-        <div className="plateFunctions">
+        <div className="editplate">
           <input
             type="text"
             name="pltsrcInput"
             placeholder="Nome do prato"
             id="pltsrcInput"
           />
-          <button type="button" id="newplatebtn">
-            Novo Prato
+          <textarea
+            type="text"
+            name="pltdscInput"
+            placeholder="Descrição do prato"
+            id="pltdscInput"
+          />
+          <div className="mergeInputs">
+            <input
+              type="text"
+              name="priceInput"
+              placeholder="Preço"
+              id="priceInput"
+            />
+            <input
+              type="text"
+              name="fdTypeInput"
+              placeholder="Tipo de comida"
+              id="fdTypeInput"
+            />
+          </div>
+          <button
+            type="button"
+            id="newplatebtn"
+            onClick={() => navigate("/plates-page", { state: state })}
+          >
+            Voltar
           </button>
-        </div>
-        <div className="plateslist">
-          <div className="plate1">
-            <img
-              src={editIcon}
-              id="editbutton"
-              alt="editbutton"
-              onClick={() => navigate("/newplate-page", { state: state })}
-            />
-            <img src={deleteIcon} id="deletebutton" alt="deletebutton" />
-          </div>
-          <div className="plate2">
-            <img
-              src={editIcon}
-              id="editbutton"
-              alt="editbutton"
-              onClick={() => navigate("/newplate-page", { state: state })}
-            />
-            <img src={deleteIcon} id="deletebutton" alt="deletebutton" />
-          </div>
-          <div className="plate3">
-            <img
-              src={editIcon}
-              id="editbutton"
-              alt="editbutton"
-              onClick={() => navigate("/newplate-page", { state: state })}
-            />
-            <img src={deleteIcon} id="deletebutton" alt="deletebutton" />
-          </div>
-          <div className="plate4">
-            <img
-              src={editIcon}
-              id="editbutton"
-              alt="editbutton"
-              onClick={() => navigate("/newplate-page", { state: state })}
-            />
-            <img src={deleteIcon} id="deletebutton" alt="deletebutton" />
-          </div>
-          <div className="plate5">
-            <img
-              src={editIcon}
-              id="editbutton"
-              alt="editbutton"
-              onClick={() => navigate("/newplate-page", { state: state })}
-            />
-            <img src={deleteIcon} id="deletebutton" alt="deletebutton" />
-          </div>
-          <div className="plate6">
-            <img
-              src={editIcon}
-              id="editbutton"
-              alt="editbutton"
-              onClick={() => navigate("/newplate-page", { state: state })}
-            />
-            <img src={deleteIcon} id="deletebutton" alt="deletebutton" />
-          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default PlatesPage;
+export default NewPlatePage;
