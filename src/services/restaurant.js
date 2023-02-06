@@ -1,5 +1,3 @@
-import plateImageMock from "../images/biscoitogatinho.png";
-
 export async function getRestaurantFetch(token) {
   return fetch("https://develfood-3.herokuapp.com/restaurant/auth", {
     method: "GET",
@@ -126,13 +124,24 @@ export async function updateDataFetch(resId, token, street) {
     .catch((err) => console.log("Erro de solicitação", err));
 }
 
-export async function Plate1() {
-  return platemock;
+// Preciso criar o código fetch e tratar os erros com mock
+export async function getPlatesFetch(token) {
+  return fetch("https://develfood-3.herokuapp.com/plate", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json; charset=utf8",
+      Authorization: "Bearer " + token,
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => response)
+    .catch((err) => platemock);
 }
 
 const platemock = {
+  id: 1,
   name: "Buxada de gato",
   description:
     "A melhor buxada que você vai comer na sua vida. Qual carne usamos? Preferimos não tocar nesse assunto.",
-  image: plateImageMock,
+  price: 20,
 };

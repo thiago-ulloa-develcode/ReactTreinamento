@@ -8,14 +8,12 @@ import homeBtnImage from "./images/homebutton.png";
 import kfImage from "./images/kficon.png";
 import editIcon from "./images/editicon.png";
 import deleteIcon from "./images/deleteicon.png";
-import { getRestaurantFetch, Plate1 } from "../../services/restaurant";
-import { getByPlaceholderText } from "@testing-library/react";
+import { getRestaurantFetch, getPlatesFetch } from "../../services/restaurant";
 
 function PlatesPage() {
   let navigate = useNavigate();
   const [btnState, setBtnState] = React.useState(false);
   const [resName, setResName] = React.useState("");
-  const [plate, setPlate] = React.useState("");
 
   const { state } = useLocation();
   const { token } = state;
@@ -26,7 +24,6 @@ function PlatesPage() {
 
   React.useEffect(() => {
     getRestaurant();
-    getPlate();
   }, []);
 
   let toggleClassCheck = btnState ? "-open" : "";
@@ -38,11 +35,6 @@ function PlatesPage() {
 
   const onFetchSucess = async (resData) => {
     setResName(resData.name);
-  };
-
-  const getPlate = async () => {
-    const plate = await Plate1();
-    console.log(plate.name);
   };
 
   // função para alternar texto de acordo com o menu
@@ -121,7 +113,11 @@ function PlatesPage() {
             placeholder="Nome do prato"
             id="pltsrcInput"
           />
-          <button type="button" id="newplatebtn">
+          <button
+            type="button"
+            id="newplatebtn"
+            onClick={() => navigate("/newplate-page", { state: state })}
+          >
             Novo Prato
           </button>
         </div>

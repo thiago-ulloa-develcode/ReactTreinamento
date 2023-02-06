@@ -6,14 +6,12 @@ import menuImage from "./images/menubar.png";
 import profileImage from "./images/profileicon.png";
 import homeBtnImage from "./images/homebutton.png";
 import kfImage from "./images/kficon.png";
-import editIcon from "./images/editicon.png";
-import deleteIcon from "./images/deleteicon.png";
-import { getRestaurantFetch } from "../../services/restaurant";
+import { getPlatesFetch } from "../../services/restaurant";
 
 function NewPlatePage() {
   let navigate = useNavigate();
   const [btnState, setBtnState] = React.useState(false);
-  const [resName, setResName] = React.useState("");
+  const [plate, setPlate] = React.useState("");
 
   const { state } = useLocation();
   const { token } = state;
@@ -23,19 +21,15 @@ function NewPlatePage() {
   }
 
   React.useEffect(() => {
-    getRestaurant();
+    getPlates();
   }, []);
 
+  const getPlates = async () => {
+    const plate = await getPlatesFetch();
+    setPlate(plate);
+  };
+
   let toggleClassCheck = btnState ? "-open" : "";
-
-  const getRestaurant = async () => {
-    const restaurant = await getRestaurantFetch(token);
-    onFetchSucess(restaurant);
-  };
-
-  const onFetchSucess = async (resData) => {
-    setResName(resData.name);
-  };
 
   // função para alternar texto de acordo com o menu
   function toggleText() {
@@ -110,12 +104,14 @@ function NewPlatePage() {
             type="text"
             name="pltsrcInput"
             placeholder="Nome do prato"
+            defaultValue={plate.name}
             id="pltsrcInput"
           />
           <textarea
             type="text"
             name="pltdscInput"
             placeholder="Descrição do prato"
+            defaultValue={plate.description}
             id="pltdscInput"
           />
           <div className="mergeInputs">
@@ -123,6 +119,7 @@ function NewPlatePage() {
               type="text"
               name="priceInput"
               placeholder="Preço"
+              defaultValue={plate.price}
               id="priceInput"
             />
             <input

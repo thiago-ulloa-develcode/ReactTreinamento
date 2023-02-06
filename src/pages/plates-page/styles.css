@@ -49,7 +49,6 @@
   border-radius: 6px;
   margin: 15px;
   text-align: center !important;
-  background-image: url(./images/promotionex.jpg);
   background-size: cover;
 }
 
@@ -69,7 +68,6 @@
   border-radius: 6px;
   margin: 15px;
   text-align: center !important;
-  background-image: url(./images/promotionex.jpg);
   filter: grayscale(70%);
   background-size: cover;
 }
