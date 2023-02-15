@@ -35,11 +35,7 @@ function RegisterPage() {
       if (!resp) {
         navigate("/foods-page", { state: form });
       } else {
-        {
-          {
-            notify(toast);
-          }
-        }
+        notify(toast);
       }
     }
   };
