@@ -178,6 +178,7 @@ h1 {
 
 .clientsFeedbacks {
   display: flex;
+  overflow-y: scroll;
   justify-content: center;
   flex-direction: column;
   width: 450px;
@@ -211,12 +212,12 @@ h1 {
   height: auto;
 }
 
-#evImage1 {
+.evaluation-image {
   width: auto;
   height: 25.5px;
 }
 
-.feedback1 {
+.feedbacks {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -224,36 +225,13 @@ h1 {
   height: 125px;
   border: 3px solid black;
   border-radius: 6px;
-  padding: 10px;
   margin: 10px;
   text-align: center !important;
   background-color: floralwhite;
 }
 
-.feedback2 {
+.right-align {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  width: 405px;
-  height: 125px;
-  border: 3px solid black;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 10px;
-  text-align: center !important;
-  background-color: floralwhite;
-}
-
-.feedback3 {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 405px;
-  height: 125px;
-  border: 3px solid black;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 10px;
-  text-align: center !important;
-  background-color: floralwhite;
+  align-items: center;
 }

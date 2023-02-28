@@ -71,23 +71,57 @@ export async function getRestaurantFeedbacks() {
   return feedbacks;
 }
 
-const feedbacks = {
-  feedback1: {
+const feedbacks = [
+  {
+    id: "feedback1",
     message: "A comida desse lugar é ótima, uma pena que o pedido atrasou.",
     evaluation: 4,
     date: "15/11/2022",
+    image: 1231,
   },
-  feedback2: {
+  {
+    id: "feedback2",
     message: "A comida estava ótima.",
     evaluation: 4.5,
     date: "12/11/2022",
   },
-  feedback3: {
+  {
+    id: "feedback3",
     message: "A comida desse lugar é ótima, mas esqueceram parte do pedido.",
     evaluation: 2,
     date: "10/11/2022",
   },
-};
+  {
+    id: "feedback4",
+    message: "A comida desse lugar é ótima, mas esqueceram parte do pedido.",
+    evaluation: 2,
+    date: "10/11/2022",
+  },
+  {
+    id: "feedback3",
+    message: "A comida desse lugar é ótima, mas esqueceram parte do pedido.",
+    evaluation: 2,
+    date: "10/11/2022",
+  },
+  {
+    id: "feedback4",
+    message: "A comida desse lugar é ótima, mas esqueceram parte do pedido.",
+    evaluation: 2,
+    date: "10/11/2022",
+  },
+  {
+    id: "feedback3",
+    message: "A comida desse lugar é ótima, mas esqueceram parte do pedido.",
+    evaluation: 2,
+    date: "10/11/2022",
+  },
+  {
+    id: "feedback4",
+    message: "A comida desse lugar é ótima, mas esqueceram parte do pedido.",
+    evaluation: 2,
+    date: "10/11/2022",
+  },
+];
 
 export async function getAuthFetch(token) {
   return fetch("https://develfood-3.herokuapp.com/auth", {

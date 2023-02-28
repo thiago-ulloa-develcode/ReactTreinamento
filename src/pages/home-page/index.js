@@ -37,23 +37,8 @@ function HomePage() {
   const [resId, setResId] = React.useState(""); // Informações do restaurante
   const [resEvaluation, setResEvaluation] = React.useState("");
   const [promoMessage, setPromoMessage] = React.useState("");
-  const [resFeedbacks, setResFeedbacks] = React.useState({
-    feedback1: {
-      message: "",
-      evaluation: 0,
-      date: "",
-    },
-    feedback2: {
-      message: "",
-      evaluation: 0,
-      date: "",
-    },
-    feedback3: {
-      message: "",
-      evaluation: 0,
-      date: "",
-    },
-  });
+  const [resFeedbacks, setResFeedbacks] = React.useState([]);
+  const [showedEvaluations, setShowedEvaluations] = React.useState(3);
 
   const { state } = useLocation();
   const { token } = state;
@@ -63,18 +48,7 @@ function HomePage() {
   }
 
   React.useEffect(() => {
-    if (resEvaluation) evaluationImage();
-    if (resFeedbacks) evaluationImageFd1();
-    if (resFeedbacks) evaluationImageFd2();
-    if (resFeedbacks) evaluationImageFd3();
-  }, [resEvaluation, resFeedbacks]);
-
-  React.useEffect(() => {
     getRestaurant();
-    evaluationImage();
-    evaluationImageFd1();
-    evaluationImageFd2();
-    evaluationImageFd3();
   }, []);
 
   const getRestaurant = async () => {
@@ -83,14 +57,17 @@ function HomePage() {
   };
 
   const onFetchSucess = async (resData) => {
-    console.log(resData);
     setResName(resData.name);
     setResId(resData.id);
+
     const promotion = await getRestaurantPromotions(resData.id);
     const evaluation = await getRestaurantEvaluation(resData.id);
     const feedbacks = await getRestaurantFeedbacks();
-    setResFeedbacks(feedbacks);
+    const parseFeedbacks = setEvaluationImage(feedbacks);
+
+    setResFeedbacks(parseFeedbacks);
     setResEvaluation(evaluation.grade);
+    evaluationImage(evaluation.grade);
     setPromoMessage(promotion.message);
   };
 
@@ -101,6 +78,7 @@ function HomePage() {
     var text = document.getElementById("hometext");
     var text2 = document.getElementById("profiletext");
     var text3 = document.getElementById("menutext");
+
     if (text.style.display === "flex") {
       text.style.display = "none";
       text2.style.display = "none";
@@ -112,154 +90,47 @@ function HomePage() {
     }
   }
 
-  const evaluationImage = () => {
-    if (resEvaluation >= 5) {
-      setResImage(image5);
-    } else if (resEvaluation > 4.4 && resEvaluation < 5) {
-      setResImage(image45);
-    } else if (resEvaluation >= 4) {
-      setResImage(image4);
-    } else if (resEvaluation > 3.4 && resEvaluation < 4) {
-      setResImage(image35);
-    } else if (resEvaluation >= 3) {
-      setResImage(image3);
-    } else if (resEvaluation > 2.4 && resEvaluation < 3) {
-      setResImage(image25);
-    } else if (resEvaluation >= 2) {
-      setResImage(image2);
-    } else if (resEvaluation > 1.4 && resEvaluation < 2) {
-      setResImage(image15);
-    } else if (resEvaluation >= 1) {
-      setResImage(image1);
-    } else if (resEvaluation > 0.4 && resEvaluation < 1) {
-      setResImage(image05);
-    } else if (resEvaluation >= 0) {
-      setResImage(image0);
+  const evaluationImage = (grade) => {
+    const evalImage = parseEvaluation(grade);
+    setResImage(evalImage);
+  };
+
+  const setEvaluationImage = (feedbacks) => {
+    const parsedFeedbacks = feedbacks.map((feedback) => ({
+      ...feedback,
+      image: parseEvaluation(feedback.evaluation),
+    }));
+
+    return parsedFeedbacks;
+  };
+
+  const parseEvaluation = (evaluation) => {
+    if (evaluation >= 5) {
+      return image5;
+    } else if (evaluation > 4.4 && evaluation < 5) {
+      return image45;
+    } else if (evaluation >= 4) {
+      return image4;
+    } else if (evaluation > 3.4 && evaluation < 4) {
+      return image35;
+    } else if (evaluation >= 3) {
+      return image3;
+    } else if (evaluation > 2.4 && evaluation < 3) {
+      return image25;
+    } else if (evaluation >= 2) {
+      return image2;
+    } else if (evaluation > 1.4 && evaluation < 2) {
+      return image15;
+    } else if (evaluation >= 1) {
+      return image1;
+    } else if (evaluation > 0.4 && evaluation < 1) {
+      return image05;
+    } else if (evaluation >= 0) {
+      return image0;
     }
   };
 
-  const evaluationImageFd1 = () => {
-    if (resFeedbacks.feedback1.evaluation >= 5) {
-      setEvImage1(image5);
-    } else if (
-      resFeedbacks.feedback1.evaluation > 4.4 &&
-      resFeedbacks.feedback1.evaluation < 5
-    ) {
-      setEvImage1(image45);
-    } else if (resFeedbacks.feedback1.evaluation >= 4) {
-      setEvImage1(image4);
-    } else if (
-      resFeedbacks.feedback1.evaluation > 3.4 &&
-      resFeedbacks.feedback1.evaluation < 4
-    ) {
-      setEvImage1(image35);
-    } else if (resFeedbacks.feedback1.evaluation >= 3) {
-      setEvImage1(image3);
-    } else if (
-      resFeedbacks.feedback1.evaluation > 2.4 &&
-      resFeedbacks.feedback1.evaluation < 3
-    ) {
-      setEvImage1(image25);
-    } else if (resFeedbacks.feedback1.evaluation >= 2) {
-      setEvImage1(image2);
-    } else if (
-      resFeedbacks.feedback1.evaluation > 1.4 &&
-      resFeedbacks.feedback1.evaluation < 2
-    ) {
-      setEvImage1(image15);
-    } else if (resFeedbacks.feedback1.evaluation >= 1) {
-      setEvImage1(image1);
-    } else if (
-      resFeedbacks.feedback1.evaluation > 0.4 &&
-      resFeedbacks.feedback1.evaluation < 1
-    ) {
-      setEvImage1(image05);
-    } else if (resFeedbacks.feedback1.evaluation >= 0) {
-      setEvImage1(image0);
-    }
-  };
-
-  const evaluationImageFd2 = () => {
-    if (resFeedbacks.feedback2.evaluation >= 5) {
-      setEvImage2(image5);
-    } else if (
-      resFeedbacks.feedback2.evaluation > 4.4 &&
-      resFeedbacks.feedback2.evaluation < 5
-    ) {
-      setEvImage2(image45);
-    } else if (resFeedbacks.feedback2.evaluation >= 4) {
-      setEvImage2(image4);
-    } else if (
-      resFeedbacks.feedback2.evaluation > 3.4 &&
-      resFeedbacks.feedback2.evaluation < 4
-    ) {
-      setEvImage2(image35);
-    } else if (resFeedbacks.feedback2.evaluation >= 3) {
-      setEvImage2(image3);
-    } else if (
-      resFeedbacks.feedback2.evaluation > 2.4 &&
-      resFeedbacks.feedback2.evaluation < 3
-    ) {
-      setEvImage2(image25);
-    } else if (resFeedbacks.feedback2.evaluation >= 2) {
-      setEvImage2(image2);
-    } else if (
-      resFeedbacks.feedback2.evaluation > 1.4 &&
-      resFeedbacks.feedback2.evaluation < 2
-    ) {
-      setEvImage2(image15);
-    } else if (resFeedbacks.feedback2.evaluation >= 1) {
-      setEvImage2(image1);
-    } else if (
-      resFeedbacks.feedback2.evaluation > 0.4 &&
-      resFeedbacks.feedback2.evaluation < 1
-    ) {
-      setEvImage2(image05);
-    } else if (resFeedbacks.feedback2.evaluation >= 0) {
-      setEvImage2(image0);
-    }
-  };
-
-  const evaluationImageFd3 = () => {
-    if (resFeedbacks.feedback3.evaluation >= 5) {
-      setEvImage3(image5);
-    } else if (
-      resFeedbacks.feedback3.evaluation > 4.4 &&
-      resFeedbacks.feedback3.evaluation < 5
-    ) {
-      setEvImage3(image45);
-    } else if (resFeedbacks.feedback3.evaluation >= 4) {
-      setEvImage3(image4);
-    } else if (
-      resFeedbacks.feedback3.evaluation > 3.4 &&
-      resFeedbacks.feedback3.evaluation < 4
-    ) {
-      setEvImage3(image35);
-    } else if (resFeedbacks.feedback3.evaluation >= 3) {
-      setEvImage3(image3);
-    } else if (
-      resFeedbacks.feedback3.evaluation > 2.4 &&
-      resFeedbacks.feedback3.evaluation < 3
-    ) {
-      setEvImage3(image25);
-    } else if (resFeedbacks.feedback3.evaluation >= 2) {
-      setEvImage3(image2);
-    } else if (
-      resFeedbacks.feedback3.evaluation > 1.4 &&
-      resFeedbacks.feedback3.evaluation < 2
-    ) {
-      setEvImage3(image15);
-    } else if (resFeedbacks.feedback3.evaluation >= 1) {
-      setEvImage3(image1);
-    } else if (
-      resFeedbacks.feedback3.evaluation > 0.4 &&
-      resFeedbacks.feedback3.evaluation < 1
-    ) {
-      setEvImage3(image05);
-    } else if (resFeedbacks.feedback3.evaluation >= 0) {
-      setEvImage3(image0);
-    }
-  };
+  const parsedResFeedbacks = resFeedbacks.slice(0, showedEvaluations);
 
   return (
     <div className="homepage">
@@ -330,28 +201,18 @@ function HomePage() {
           <div className="right-align">
             <div className="clientsFeedbacks">
               <h3>Avaliações dos Clientes</h3>
-              {resFeedbacks?.feedback1 && (
-                <div className="feedback1">
-                  <p>{resFeedbacks.feedback1.message}</p>
-                  <img src={evImage1} id="evImage1" />
-                  <p>{resFeedbacks.feedback1.date}</p>
-                </div>
-              )}
-              {resFeedbacks?.feedback2 && (
-                <div className="feedback2">
-                  <p>{resFeedbacks.feedback2.message}</p>
-                  <img src={evImage2} id="evImage1" />
-                  <p>{resFeedbacks.feedback2.date}</p>
-                </div>
-              )}
-              {resFeedbacks?.feedback3 && (
-                <div className="feedback3">
-                  <p>{resFeedbacks.feedback3.message}</p>
-                  <img src={evImage3} id="evImage1" />
-                  <p>{resFeedbacks.feedback3.date}</p>
-                </div>
-              )}
+              {resFeedbacks.length &&
+                parsedResFeedbacks.map((feedback) => (
+                  <div className="feedbacks">
+                    <p>{feedback.message}</p>
+                    <img src={feedback.image} className="evaluation-image" />
+                    <p>{feedback.date}</p>
+                  </div>
+                ))}
             </div>
+            <button onClick={() => setShowedEvaluations(showedEvaluations + 3)}>
+              Mostrar mais
+            </button>
           </div>
         </div>
         <div className="bottom-align"></div>
