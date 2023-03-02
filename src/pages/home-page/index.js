@@ -7,6 +7,7 @@ import homeBtnImage from "./images/homebutton.png";
 import promoImage from "./images/promotionex.jpg";
 import kfImage from "./images/kficon.png";
 import noPromoImage from "../../images/nopromotionsimage.png";
+import PromotionIcon from "../../images/promotionicon.png";
 import image0 from "./images/starsimages/0.png";
 import image05 from "./images/starsimages/0.5.png";
 import image1 from "./images/starsimages/1.png";
@@ -75,18 +76,21 @@ function HomePage() {
 
   // função para alternar texto de acordo com o menu
   function toggleText() {
-    var text = document.getElementById("hometext");
-    var text2 = document.getElementById("profiletext");
-    var text3 = document.getElementById("menutext");
+    var hometext = document.getElementById("hometext");
+    var profiletext = document.getElementById("profiletext");
+    var menutext = document.getElementById("menutext");
+    var promotiontext = document.getElementById("promotiontext");
 
-    if (text.style.display === "flex") {
-      text.style.display = "none";
-      text2.style.display = "none";
-      text3.style.display = "none";
+    if (hometext.style.display === "flex") {
+      hometext.style.display = "none";
+      profiletext.style.display = "none";
+      menutext.style.display = "none";
+      promotiontext.style.display = "none";
     } else {
-      text.style.display = "flex";
-      text2.style.display = "flex";
-      text3.style.display = "flex";
+      hometext.style.display = "flex";
+      profiletext.style.display = "flex";
+      menutext.style.display = "flex";
+      promotiontext.style.display = "flex";
     }
   }
 
@@ -178,6 +182,17 @@ function HomePage() {
             />
             <p id="menutext" className="text">
               Menu
+            </p>
+          </div>
+          <div className="promotionMenu">
+            <img
+              src={PromotionIcon}
+              id="promotion-button"
+              alt="promotion-button"
+              onClick={() => navigate("/promotions-page", { state: state })}
+            />
+            <p id="promotiontext" className="text">
+              Promoções
             </p>
           </div>
         </div>

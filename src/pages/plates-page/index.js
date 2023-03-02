@@ -7,6 +7,7 @@ import profileImage from "./images/profileicon.png";
 import homeBtnImage from "./images/homebutton.png";
 import kfImage from "./images/kficon.png";
 import editIcon from "./images/editicon.png";
+import PromotionIcon from "../../images/promotionicon.png";
 import deleteIcon from "./images/deleteicon.png";
 import { getRestaurantFetch, getPlatesFetch } from "../../services/restaurant";
 
@@ -39,20 +40,23 @@ function PlatesPage() {
 
   // função para alternar texto de acordo com o menu
   function toggleText() {
-    var text = document.getElementById("hometext");
-    var text2 = document.getElementById("profiletext");
-    var text3 = document.getElementById("menutext");
-    if (text.style.display === "flex") {
-      text.style.display = "none";
-      text2.style.display = "none";
-      text3.style.display = "none";
+    var hometext = document.getElementById("hometext");
+    var profiletext = document.getElementById("profiletext");
+    var menutext = document.getElementById("menutext");
+    var promotiontext = document.getElementById("promotiontext");
+
+    if (hometext.style.display === "flex") {
+      hometext.style.display = "none";
+      profiletext.style.display = "none";
+      menutext.style.display = "none";
+      promotiontext.style.display = "none";
     } else {
-      text.style.display = "flex";
-      text2.style.display = "flex";
-      text3.style.display = "flex";
+      hometext.style.display = "flex";
+      profiletext.style.display = "flex";
+      menutext.style.display = "flex";
+      promotiontext.style.display = "flex";
     }
   }
-
   return (
     <div className="platesPage">
       <div className={`sideMenu${toggleClassCheck}`}>
@@ -99,6 +103,17 @@ function PlatesPage() {
             />
             <p id="menutext" className="text">
               Menu
+            </p>
+          </div>
+          <div className="promotionMenu">
+            <img
+              src={PromotionIcon}
+              id="promotion-button"
+              alt="promotion-button"
+              onClick={() => navigate("/promotions-page", { state: state })}
+            />
+            <p id="promotiontext" className="text">
+              Promoções
             </p>
           </div>
         </div>
